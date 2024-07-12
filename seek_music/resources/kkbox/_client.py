@@ -5,6 +5,7 @@ from yarl import URL
 
 from seek_music.config import settings
 from seek_music.resources.kkbox.oauth2 import Oauth2
+from seek_music.types.kkbox.search_call import SearchCall
 from seek_music.types.kkbox.search_response import SearchResponse
 from seek_music.types.kkbox.token import Token
 from seek_music.utils.url import join_paths
@@ -68,20 +69,13 @@ class KKBox:
             self.client.logger.debug(f"Authenticated with token {self.token!r}")
         return self.token
 
-    def search(self) -> "SearchResponse":
+    def search(self, search_call: "SearchCall") -> "SearchResponse":
         url = str(
             self.base_url.with_path(join_paths(self.base_url.path, self.path_search))
         )
         headers = self.headers
+        data = search_call.model_dump(exclude_none=True)
         with self.client.session as session:
-            res = session.get(
-                url,
-                headers=headers,
-                params={
-                    "q": "Different World",
-                    "type": "track",
-                    "territory": "TW",
-                },
-            )
+            res = session.get(url, headers=headers, params=data)
             res.raise_for_status()
             return SearchResponse.model_validate(res.json())

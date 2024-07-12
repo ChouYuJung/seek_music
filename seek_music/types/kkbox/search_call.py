@@ -1,9 +1,10 @@
 from typing import Literal, Optional, Text
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class SearchCall(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     q: Text = Field(
         ...,
         title="Search query keywords",

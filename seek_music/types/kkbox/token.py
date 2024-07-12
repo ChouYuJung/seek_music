@@ -2,10 +2,11 @@ import math
 import time
 from typing import Literal
 
-from pydantic import BaseModel, Field, SecretStr, field_serializer
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_serializer
 
 
 class Token(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     access_token: SecretStr
     token_type: Literal["Bearer"]
     expires_in: int

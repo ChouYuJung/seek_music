@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from seek_music.types.kkbox.paging import Paging
 from seek_music.types.kkbox.summary import Summary
@@ -9,5 +9,5 @@ from seek_music.types.kkbox.track import Track
 
 class TrackData(BaseModel):
     data: List[Track]
-    paging: Paging
-    summary: Summary
+    paging: Optional[Paging] = Field(None)
+    summary: Optional[Summary] = Field(None)

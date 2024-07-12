@@ -5,6 +5,7 @@ from yarl import URL
 
 from seek_music.config import settings
 from seek_music.resources.kkbox.oauth2 import Oauth2
+from seek_music.resources.kkbox.tracks import Tracks
 from seek_music.types.kkbox.search_call import SearchCall
 from seek_music.types.kkbox.search_response import SearchResponse
 from seek_music.types.kkbox.token import Token
@@ -16,6 +17,7 @@ if TYPE_CHECKING:
 
 class KKBox:
     oauth2: "Oauth2"
+    tracks: "Tracks"
 
     path_search = "search"
 
@@ -47,6 +49,7 @@ class KKBox:
         self.token: Optional["Token"] = None
 
         self.oauth2 = Oauth2(self)
+        self.tracks = Tracks(self)
 
     @property
     def base_url(self) -> URL:

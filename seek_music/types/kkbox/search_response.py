@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import Optional
+
+from pydantic import BaseModel, Field
 
 from seek_music.types.kkbox.album_data import AlbumData
 from seek_music.types.kkbox.artist_data import ArtistData
@@ -9,9 +11,9 @@ from seek_music.types.kkbox.track_data import TrackData
 
 
 class SearchResponse(BaseModel):
-    tracks: TrackData
-    albums: AlbumData
-    artists: ArtistData
-    playlists: PlaylistData
-    summary: Summary
-    paging: Paging
+    tracks: Optional[TrackData] = Field(None)
+    albums: Optional[AlbumData] = Field(None)
+    artists: Optional[ArtistData] = Field(None)
+    playlists: Optional[PlaylistData] = Field(None)
+    summary: Optional[Summary] = Field(None)
+    paging: Optional[Paging] = Field(None)

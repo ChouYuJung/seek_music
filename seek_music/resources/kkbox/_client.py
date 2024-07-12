@@ -20,6 +20,17 @@ class KKBox:
     oauth2: "Oauth2"
     tracks: "Tracks"
     albums: "Albums"
+    # artists: "Artists"  # TODO: Implement artists
+    # charts: "Charts"  # TODO: Implement charts
+    # featured_playlists: "FeaturedPlaylists"  # TODO: Implement featured-playlists
+    # new_hits_playlists: "NewHitsPlaylists"  # TODO: Implement new-hits-playlists
+    # session_playlists: "SessionPlaylists"  # TODO: Implement session-playlists
+    # shared_playlists: "SharedPlaylists"  # TODO: Implement shared-playlists
+    # children_categories: "ChildrenCategories"  # TODO: Implement children-categories
+    # featured_playlist_categories: "FeaturedPlaylistCategories"  # TODO: Implement featured-playlist-categories
+    # new_release_categories: "NewReleaseCategories"  # TODO: Implement new-release-categories
+    # genre_stations: "GenreStations"  # TODO: Implement genre-stations
+    # mood_stations: "MoodStations"  # TODO: Implement mood-stations
 
     path_search = "search"
 

@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING, Literal, Text
 
+from seek_music.types.kkbox.track import Track
 from seek_music.types.kkbox.track_data import TrackData
 from seek_music.utils.url import join_paths
 
@@ -9,6 +10,7 @@ if TYPE_CHECKING:
 
 class Tracks:
     PATH = "tracks"
+    PATH_ID = "tracks/{track_id}"
 
     def __init__(self, parent: "KKBox"):
         self.parent = parent
@@ -24,3 +26,19 @@ class Tracks:
             res = session.get(url, headers=headers, params=params)
             res.raise_for_status()
             return TrackData.model_validate(res.json())
+
+    def retrieve(
+        self, track_id: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
+    ) -> Track:
+        base_url = self.parent.base_url
+        url = str(
+            base_url.with_path(
+                join_paths(base_url.path, self.PATH_ID.format(track_id=track_id))
+            )
+        )
+        headers = self.parent.headers
+        params = {"territory": territory}
+        with self.parent.client.session as session:
+            res = session.get(url, headers=headers, params=params)
+            res.raise_for_status()
+            return Track.model_validate(res.json())

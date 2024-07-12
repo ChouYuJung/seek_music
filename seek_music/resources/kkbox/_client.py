@@ -1,11 +1,13 @@
 import os
-from typing import TYPE_CHECKING, Optional, Text, Union
+from typing import TYPE_CHECKING, Dict, Optional, Text, Union
 
 from yarl import URL
 
 from seek_music.config import settings
 from seek_music.resources.kkbox.oauth2 import Oauth2
+from seek_music.types.kkbox.search_response import SearchResponse
 from seek_music.types.kkbox.token import Token
+from seek_music.utils.url import join_paths
 
 if TYPE_CHECKING:
     from seek_music import SeekMusic
@@ -13,6 +15,8 @@ if TYPE_CHECKING:
 
 class KKBox:
     oauth2: "Oauth2"
+
+    path_search = "search"
 
     def __init__(
         self,
@@ -51,7 +55,33 @@ class KKBox:
     def base_auth_url(self) -> URL:
         return self._base_auth_url
 
-    def authenticate(self) -> None:
+    @property
+    def headers(self) -> Dict:
+        token = self.authenticate()
+        return {
+            "Authorization": f"{token.token_type} {token.access_token.get_secret_value()}",
+        }
+
+    def authenticate(self) -> "Token":
         if self.token is None or self.token.is_expired():
             self.token = self.oauth2.token.get()
             self.client.logger.debug(f"Authenticated with token {self.token!r}")
+        return self.token
+
+    def search(self) -> "SearchResponse":
+        url = str(
+            self.base_url.with_path(join_paths(self.base_url.path, self.path_search))
+        )
+        headers = self.headers
+        with self.client.session as session:
+            res = session.get(
+                url,
+                headers=headers,
+                params={
+                    "q": "Different World",
+                    "type": "track",
+                    "territory": "TW",
+                },
+            )
+            res.raise_for_status()
+            return SearchResponse.model_validate(res.json())

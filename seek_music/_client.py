@@ -10,8 +10,7 @@ class SeekMusic:
     kkbox: "KKBox"
 
     def __init__(self):
-        self.kkbox = KKBox(self)
-
+        self.logger = logger
         self.session = requests.Session()
 
-        self.logger = logger
+        self.kkbox = KKBox(self)

@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Optional
 
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl
 
 from seek_music.types.kkbox.album import Album
 
@@ -14,4 +14,4 @@ class Track(BaseModel):
     track_number: int
     explicitness: bool
     available_territories: List[str]
-    album: Album
+    album: Optional[Album] = Field(None)

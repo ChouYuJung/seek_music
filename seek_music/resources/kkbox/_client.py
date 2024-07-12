@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Dict, Optional, Text, Union
 from yarl import URL
 
 from seek_music.config import settings
+from seek_music.resources.kkbox.albums import Albums
 from seek_music.resources.kkbox.oauth2 import Oauth2
 from seek_music.resources.kkbox.tracks import Tracks
 from seek_music.types.kkbox.search_call import SearchCall
@@ -18,6 +19,7 @@ if TYPE_CHECKING:
 class KKBox:
     oauth2: "Oauth2"
     tracks: "Tracks"
+    albums: "Albums"
 
     path_search = "search"
 
@@ -50,6 +52,7 @@ class KKBox:
 
         self.oauth2 = Oauth2(self)
         self.tracks = Tracks(self)
+        self.albums = Albums(self)
 
     @property
     def base_url(self) -> URL:

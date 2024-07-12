@@ -1,0 +1,2 @@
+class KKBox:
+    pass

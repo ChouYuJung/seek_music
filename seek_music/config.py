@@ -1,3 +1,4 @@
+import logging
 from typing import Optional, Text
 
 from cryptography.fernet import Fernet
@@ -6,6 +7,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    LOGGER_NAME: Text = "seek_music"
     FERNET_KEY: Optional[Text] = Field(default=None)
 
     _fernet: Optional[Fernet] = PrivateAttr(default=None)
@@ -27,3 +29,4 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+logger = logging.getLogger(settings.LOGGER_NAME)

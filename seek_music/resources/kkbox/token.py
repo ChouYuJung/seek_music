@@ -1,8 +1,9 @@
-from typing import TYPE_CHECKING, Dict
+from typing import TYPE_CHECKING
 
 from yarl import URL
 
 from seek_music.config import logger, settings
+from seek_music.types.kkbox.token import Token as TokenModel
 from seek_music.utils.url import join_paths
 
 if TYPE_CHECKING:
@@ -21,7 +22,7 @@ class Token:
             path=join_paths(self.parent.url.path, self.PATH)
         )
 
-    def get(self) -> Dict:
+    def get(self) -> TokenModel:
         kkbox = self.parent.parent
         with kkbox.client.session as session:
             data = {
@@ -32,4 +33,4 @@ class Token:
             logger.debug(f"Requesting token from {self.url!r}")
             res = session.post(str(self.url), data=data)
             res.raise_for_status()
-            return res.json()
+            return TokenModel.model_validate(res.json())

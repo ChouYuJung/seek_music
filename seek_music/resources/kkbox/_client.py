@@ -8,6 +8,9 @@ from seek_music.resources.kkbox.albums import Albums
 from seek_music.resources.kkbox.artists import Artists
 from seek_music.resources.kkbox.charts import Charts
 from seek_music.resources.kkbox.children_categories import ChildrenCategories
+from seek_music.resources.kkbox.featured_playlist_categories import (
+    FeaturedPlaylistCategories,
+)
 from seek_music.resources.kkbox.featured_playlists import FeaturedPlaylists
 from seek_music.resources.kkbox.new_hits_playlists import NewHitsPlaylists
 from seek_music.resources.kkbox.oauth2 import Oauth2
@@ -53,6 +56,9 @@ class KKBox:
     - [GET ] https://api.kkbox.com/v1.1/children-categories -> CategoryData
     - [GET ] https://api.kkbox.com/v1.1/children-categories/{category_id} -> SubCategoryData
     - [GET ] https://api.kkbox.com/v1.1/children-categories/{category_id}/playlists -> PlaylistData
+    - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories -> CategoryData
+    - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories/{category_id} -> Category
+    - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories/{category_id}/playlists -> PlaylistData
     """
 
     PATH = "children-categories"
@@ -69,7 +75,7 @@ class KKBox:
     session_playlists: "SessionPlaylists"
     shared_playlists: "SharedPlaylists"
     children_categories: "ChildrenCategories"
-    # featured_playlist_categories: "FeaturedPlaylistCategories"  # TODO: Implement featured-playlist-categories
+    featured_playlist_categories: "FeaturedPlaylistCategories"
     # new_release_categories: "NewReleaseCategories"  # TODO: Implement new-release-categories
     # genre_stations: "GenreStations"  # TODO: Implement genre-stations
     # mood_stations: "MoodStations"  # TODO: Implement mood-stations
@@ -113,6 +119,7 @@ class KKBox:
         self.session_playlists = SessionPlaylists(self)
         self.shared_playlists = SharedPlaylists(self)
         self.children_categories = ChildrenCategories(self)
+        self.featured_playlist_categories = FeaturedPlaylistCategories(self)
 
     @property
     def base_url(self) -> URL:

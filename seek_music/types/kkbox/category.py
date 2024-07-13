@@ -1,8 +1,9 @@
-from typing import List, Text
+from typing import List, Optional, Text
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from seek_music.types.kkbox.image import Image
+from seek_music.types.kkbox.playlist_data import PlaylistData
 
 
 class Category(BaseModel):
@@ -10,3 +11,4 @@ class Category(BaseModel):
     id: Text
     title: Text
     images: List[Image]
+    playlists: Optional[PlaylistData] = Field(default=None)

@@ -5,6 +5,7 @@ from yarl import URL
 
 from seek_music.config import settings
 from seek_music.resources.kkbox.albums import Albums
+from seek_music.resources.kkbox.artists import Artists
 from seek_music.resources.kkbox.oauth2 import Oauth2
 from seek_music.resources.kkbox.tracks import Tracks
 from seek_music.types.kkbox.search_call import SearchCall
@@ -17,10 +18,26 @@ if TYPE_CHECKING:
 
 
 class KKBox:
+    """
+    Implementation of the KKBox APIs:
+
+    - [POST] https://account.kkbox.com/oauth2/token
+    - [GET ] https://api.kkbox.com/v1.1/tracks
+    - [GET ] https://api.kkbox.com/v1.1/tracks/{track_id}
+    - [GET ] https://api.kkbox.com/v1.1/albums
+    - [GET ] https://api.kkbox.com/v1.1/albums/{albums_id}"
+    - [GET ] https://api.kkbox.com/v1.1/albums/{album_id}/tracks
+    - [GET ] https://api.kkbox.com/v1.1/artists
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/albums
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/related-artists
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/top-tracks
+    """
+
     oauth2: "Oauth2"
     tracks: "Tracks"
     albums: "Albums"
-    # artists: "Artists"  # TODO: Implement artists
+    artists: "Artists"
     # charts: "Charts"  # TODO: Implement charts
     # featured_playlists: "FeaturedPlaylists"  # TODO: Implement featured-playlists
     # new_hits_playlists: "NewHitsPlaylists"  # TODO: Implement new-hits-playlists
@@ -64,6 +81,7 @@ class KKBox:
         self.oauth2 = Oauth2(self)
         self.tracks = Tracks(self)
         self.albums = Albums(self)
+        self.artists = Artists(self)
 
     @property
     def base_url(self) -> URL:

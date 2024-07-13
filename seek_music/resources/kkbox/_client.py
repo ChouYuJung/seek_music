@@ -10,6 +10,7 @@ from seek_music.resources.kkbox.charts import Charts
 from seek_music.resources.kkbox.featured_playlists import FeaturedPlaylists
 from seek_music.resources.kkbox.new_hits_playlists import NewHitsPlaylists
 from seek_music.resources.kkbox.oauth2 import Oauth2
+from seek_music.resources.kkbox.session_playlists import SessionPlaylists
 from seek_music.resources.kkbox.tracks import Tracks
 from seek_music.types.kkbox.search_call import SearchCall
 from seek_music.types.kkbox.search_response import SearchResponse
@@ -42,6 +43,9 @@ class KKBox:
     - [GET ] https://api.kkbox.com/v1.1/new-hits-playlists -> PlaylistData
     - [GET ] https://api.kkbox.com/v1.1/new-hits-playlists/{playlist_id} -> Playlist
     - [GET ] https://api.kkbox.com/v1.1/new-hits-playlists/{playlist_id}/tracks -> TrackData
+    - [GET ] https://api.kkbox.com/v1.1/session-playlists -> PlaylistData
+    - [GET ] https://api.kkbox.com/v1.1/session-playlists/{playlist_id} -> Playlist
+    - [GET ] https://api.kkbox.com/v1.1/session-playlists/{playlist_id}/tracks -> TrackData
     """
 
     oauth2: "Oauth2"
@@ -51,7 +55,7 @@ class KKBox:
     charts: "Charts"
     featured_playlists: "FeaturedPlaylists"
     new_hits_playlists: "NewHitsPlaylists"
-    # session_playlists: "SessionPlaylists"  # TODO: Implement session-playlists
+    session_playlists: "SessionPlaylists"  # TODO: Implement session-playlists
     # shared_playlists: "SharedPlaylists"  # TODO: Implement shared-playlists
     # children_categories: "ChildrenCategories"  # TODO: Implement children-categories
     # featured_playlist_categories: "FeaturedPlaylistCategories"  # TODO: Implement featured-playlist-categories
@@ -95,6 +99,7 @@ class KKBox:
         self.charts = Charts(self)
         self.featured_playlists = FeaturedPlaylists(self)
         self.new_hits_playlists = NewHitsPlaylists(self)
+        self.session_playlists = SessionPlaylists(self)
 
     @property
     def base_url(self) -> URL:

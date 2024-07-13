@@ -9,10 +9,10 @@ if TYPE_CHECKING:
     from seek_music.resources.kkbox._client import KKBox
 
 
-class FeaturedPlaylists:
-    PATH = "featured-playlists"
-    PATH_ID = "featured-playlists/{playlist_id}"
-    PATH_ID_TRACKS = "featured-playlists/{playlist_id}/tracks"
+class SessionPlaylists:
+    PATH = "session-playlists"
+    PATH_ID = "session-playlists/{playlist_id}"
+    PATH_ID_TRACKS = "session-playlists/{playlist_id}/tracks"
 
     def __init__(self, parent: "KKBox"):
         self.parent = parent
@@ -21,11 +21,11 @@ class FeaturedPlaylists:
         self,
         territory: Literal["HK", "JP", "MY", "SG", "TW"],
         offset: int = 0,
-        limit: int = 100,
+        limit: int = 20,
     ) -> "PlaylistData":
         if offset < 0:
             raise ValueError("Value 'offset' must be greater than or equal to 0")
-        if limit < 1 or limit > 500:
+        if limit < 1 or limit > 20:
             raise ValueError(
                 "Value 'limit' must be greater than or equal to 1 "
                 + "and less than or equal to 50"

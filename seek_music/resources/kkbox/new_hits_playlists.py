@@ -10,9 +10,9 @@ if TYPE_CHECKING:
 
 
 class NewHitsPlaylists:
-    PATH = "featured-playlists"
-    PATH_ID = "/new-hits-playlists/{playlist_id}"
-    PATH_ID_TRACKS = "/new-hits-playlists/{playlist_id}/tracks"
+    PATH = "new-hits-playlists"
+    PATH_ID = "new-hits-playlists/{playlist_id}"
+    PATH_ID_TRACKS = "new-hits-playlists/{playlist_id}/tracks"
 
     def __init__(self, parent: "KKBox"):
         self.parent = parent

@@ -12,6 +12,8 @@ from seek_music.resources.kkbox.featured_playlist_categories import (
     FeaturedPlaylistCategories,
 )
 from seek_music.resources.kkbox.featured_playlists import FeaturedPlaylists
+from seek_music.resources.kkbox.genre_stations import GenreStations
+from seek_music.resources.kkbox.mood_stations import MoodStations
 from seek_music.resources.kkbox.new_hits_playlists import NewHitsPlaylists
 from seek_music.resources.kkbox.new_release_categories import NewReleaseCategories
 from seek_music.resources.kkbox.oauth2 import Oauth2
@@ -63,11 +65,11 @@ class KKBox:
     - [GET ] https://api.kkbox.com/v1.1/new-release-categories
     - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}
     - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}/albums
+    - [GET ] https://api.kkbox.com/v1.1/genre-stations
+    - [GET ] https://api.kkbox.com/v1.1/genre-stations/{station_id}
+    - [GET ] https://api.kkbox.com/v1.1/mood-stations
+    - [GET ] https://api.kkbox.com/v1.1/mood-stations/{station_id}
     """
-
-    PATH = "children-categories"
-    PATH_ID = "children-categories/{category_id}"
-    PATH_ID_PLAYLISTS = "children-categories/{category_id}/playlists"
 
     oauth2: "Oauth2"
     tracks: "Tracks"
@@ -81,8 +83,8 @@ class KKBox:
     children_categories: "ChildrenCategories"
     featured_playlist_categories: "FeaturedPlaylistCategories"
     new_release_categories: "NewReleaseCategories"
-    # genre_stations: "GenreStations"  # TODO: Implement genre-stations
-    # mood_stations: "MoodStations"  # TODO: Implement mood-stations
+    genre_stations: "GenreStations"
+    mood_stations: "MoodStations"
 
     path_search = "search"
 
@@ -125,6 +127,8 @@ class KKBox:
         self.children_categories = ChildrenCategories(self)
         self.featured_playlist_categories = FeaturedPlaylistCategories(self)
         self.new_release_categories = NewReleaseCategories(self)
+        self.genre_stations = GenreStations(self)
+        self.mood_stations = MoodStations(self)
 
     @property
     def base_url(self) -> URL:

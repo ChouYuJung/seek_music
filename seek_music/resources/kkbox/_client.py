@@ -13,6 +13,7 @@ from seek_music.resources.kkbox.featured_playlist_categories import (
 )
 from seek_music.resources.kkbox.featured_playlists import FeaturedPlaylists
 from seek_music.resources.kkbox.new_hits_playlists import NewHitsPlaylists
+from seek_music.resources.kkbox.new_release_categories import NewReleaseCategories
 from seek_music.resources.kkbox.oauth2 import Oauth2
 from seek_music.resources.kkbox.session_playlists import SessionPlaylists
 from seek_music.resources.kkbox.shared_playlists import SharedPlaylists
@@ -59,6 +60,9 @@ class KKBox:
     - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories -> CategoryData
     - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories/{category_id} -> Category
     - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories/{category_id}/playlists -> PlaylistData
+    - [GET ] https://api.kkbox.com/v1.1/new-release-categories
+    - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}
+    - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}/albums
     """
 
     PATH = "children-categories"
@@ -76,7 +80,7 @@ class KKBox:
     shared_playlists: "SharedPlaylists"
     children_categories: "ChildrenCategories"
     featured_playlist_categories: "FeaturedPlaylistCategories"
-    # new_release_categories: "NewReleaseCategories"  # TODO: Implement new-release-categories
+    new_release_categories: "NewReleaseCategories"
     # genre_stations: "GenreStations"  # TODO: Implement genre-stations
     # mood_stations: "MoodStations"  # TODO: Implement mood-stations
 
@@ -120,6 +124,7 @@ class KKBox:
         self.shared_playlists = SharedPlaylists(self)
         self.children_categories = ChildrenCategories(self)
         self.featured_playlist_categories = FeaturedPlaylistCategories(self)
+        self.new_release_categories = NewReleaseCategories(self)
 
     @property
     def base_url(self) -> URL:

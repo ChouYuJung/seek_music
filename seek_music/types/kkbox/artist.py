@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Optional, Text
 
-from pydantic import BaseModel, ConfigDict, HttpUrl
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
 from seek_music.types.kkbox.image import Image
 
@@ -11,3 +11,4 @@ class Artist(BaseModel):
     name: str
     url: HttpUrl
     images: List[Image]
+    description: Optional[Text] = Field(default=None)

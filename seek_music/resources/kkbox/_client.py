@@ -6,6 +6,7 @@ from yarl import URL
 from seek_music.config import settings
 from seek_music.resources.kkbox.albums import Albums
 from seek_music.resources.kkbox.artists import Artists
+from seek_music.resources.kkbox.charts import Charts
 from seek_music.resources.kkbox.oauth2 import Oauth2
 from seek_music.resources.kkbox.tracks import Tracks
 from seek_music.types.kkbox.search_call import SearchCall
@@ -21,24 +22,25 @@ class KKBox:
     """
     Implementation of the KKBox APIs:
 
-    - [POST] https://account.kkbox.com/oauth2/token
-    - [GET ] https://api.kkbox.com/v1.1/tracks
-    - [GET ] https://api.kkbox.com/v1.1/tracks/{track_id}
-    - [GET ] https://api.kkbox.com/v1.1/albums
-    - [GET ] https://api.kkbox.com/v1.1/albums/{albums_id}"
-    - [GET ] https://api.kkbox.com/v1.1/albums/{album_id}/tracks
-    - [GET ] https://api.kkbox.com/v1.1/artists
-    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}
-    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/albums
-    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/related-artists
-    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/top-tracks
+    - [POST] https://account.kkbox.com/oauth2/token -> Token
+    - [GET ] https://api.kkbox.com/v1.1/tracks -> TrackData
+    - [GET ] https://api.kkbox.com/v1.1/tracks/{track_id} -> Track
+    - [GET ] https://api.kkbox.com/v1.1/albums/{albums_id} -> Album
+    - [GET ] https://api.kkbox.com/v1.1/albums/{album_id}/tracks -> TrackData
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id} -> Artist
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/albums -> AlbumData
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/related-artists -> ArtistData
+    - [GET ] https://api.kkbox.com/v1.1/artists/{artist_id}/top-tracks -> TrackData
+    - [GET ] https://api.kkbox.com/v1.1/charts -> Charts
+    - [GET ] https://api.kkbox.com/v1.1/charts/{playlist_id} -> PlaylistData
+    - [GET ] https://api.kkbox.com/v1.1/charts/{playlist_id}/tracks -> TrackData
     """
 
     oauth2: "Oauth2"
     tracks: "Tracks"
     albums: "Albums"
     artists: "Artists"
-    # charts: "Charts"  # TODO: Implement charts
+    charts: "Charts"
     # featured_playlists: "FeaturedPlaylists"  # TODO: Implement featured-playlists
     # new_hits_playlists: "NewHitsPlaylists"  # TODO: Implement new-hits-playlists
     # session_playlists: "SessionPlaylists"  # TODO: Implement session-playlists
@@ -82,6 +84,7 @@ class KKBox:
         self.tracks = Tracks(self)
         self.albums = Albums(self)
         self.artists = Artists(self)
+        self.charts = Charts(self)
 
     @property
     def base_url(self) -> URL:

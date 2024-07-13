@@ -1,9 +1,10 @@
-from typing import List
+from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, HttpUrl
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
 from seek_music.types.kkbox.artist import Artist
 from seek_music.types.kkbox.image import Image
+from seek_music.types.kkbox.track_data import TrackData
 
 
 class Playlist(BaseModel):
@@ -15,3 +16,4 @@ class Playlist(BaseModel):
     images: List[Image]
     updated_at: str
     owner: Artist
+    tracks: Optional[TrackData] = Field(None)

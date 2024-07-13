@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Text, Union
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
@@ -14,6 +14,6 @@ class Playlist(BaseModel):
     description: str
     url: HttpUrl
     images: List[Image]
-    updated_at: str
+    updated_at: Union[Text, int]
     owner: Artist
     tracks: Optional[TrackData] = Field(None)

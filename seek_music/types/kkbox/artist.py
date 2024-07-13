@@ -9,6 +9,6 @@ class Artist(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: str
     name: str
-    url: HttpUrl
-    images: List[Image]
+    url: Optional[HttpUrl] = Field(default=None)
+    images: Optional[List[Image]] = Field(default=None)
     description: Optional[Text] = Field(default=None)

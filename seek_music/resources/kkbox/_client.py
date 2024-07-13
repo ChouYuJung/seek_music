@@ -7,6 +7,7 @@ from seek_music.config import settings
 from seek_music.resources.kkbox.albums import Albums
 from seek_music.resources.kkbox.artists import Artists
 from seek_music.resources.kkbox.charts import Charts
+from seek_music.resources.kkbox.children_categories import ChildrenCategories
 from seek_music.resources.kkbox.featured_playlists import FeaturedPlaylists
 from seek_music.resources.kkbox.new_hits_playlists import NewHitsPlaylists
 from seek_music.resources.kkbox.oauth2 import Oauth2
@@ -49,7 +50,14 @@ class KKBox:
     - [GET ] https://api.kkbox.com/v1.1/session-playlists/{playlist_id}/tracks -> TrackData
     - [GET ] https://api.kkbox.com/v1.1/shared-playlists/{playlist_id} -> Playlist
     - [GET ] https://api.kkbox.com/v1.1/shared-playlists/{playlist_id}/tracks -> TrackData
+    - [GET ] https://api.kkbox.com/v1.1/children-categories -> CategoryData
+    - [GET ] https://api.kkbox.com/v1.1/children-categories/{category_id} -> SubCategoryData
+    - [GET ] https://api.kkbox.com/v1.1/children-categories/{category_id}/playlists -> PlaylistData
     """
+
+    PATH = "children-categories"
+    PATH_ID = "children-categories/{category_id}"
+    PATH_ID_PLAYLISTS = "children-categories/{category_id}/playlists"
 
     oauth2: "Oauth2"
     tracks: "Tracks"
@@ -60,7 +68,7 @@ class KKBox:
     new_hits_playlists: "NewHitsPlaylists"
     session_playlists: "SessionPlaylists"
     shared_playlists: "SharedPlaylists"
-    # children_categories: "ChildrenCategories"  # TODO: Implement children-categories
+    children_categories: "ChildrenCategories"
     # featured_playlist_categories: "FeaturedPlaylistCategories"  # TODO: Implement featured-playlist-categories
     # new_release_categories: "NewReleaseCategories"  # TODO: Implement new-release-categories
     # genre_stations: "GenreStations"  # TODO: Implement genre-stations
@@ -104,6 +112,7 @@ class KKBox:
         self.new_hits_playlists = NewHitsPlaylists(self)
         self.session_playlists = SessionPlaylists(self)
         self.shared_playlists = SharedPlaylists(self)
+        self.children_categories = ChildrenCategories(self)
 
     @property
     def base_url(self) -> URL:

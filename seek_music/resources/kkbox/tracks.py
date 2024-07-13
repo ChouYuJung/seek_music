@@ -1,5 +1,6 @@
-from typing import TYPE_CHECKING, Literal, Text
+from typing import TYPE_CHECKING, Text
 
+from seek_music.types.kkbox.territory import TerritoriesType
 from seek_music.types.kkbox.track import Track
 from seek_music.types.kkbox.track_data import TrackData
 from seek_music.utils.url import join_paths
@@ -15,9 +16,7 @@ class Tracks:
     def __init__(self, parent: "KKBox"):
         self.parent = parent
 
-    def list(
-        self, ids: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
-    ) -> TrackData:
+    def list(self, ids: Text, territory: TerritoriesType) -> TrackData:
         base_url = self.parent.base_url
         url = str(base_url.with_path(join_paths(base_url.path, self.PATH)))
         headers = self.parent.headers
@@ -27,9 +26,7 @@ class Tracks:
             res.raise_for_status()
             return TrackData.model_validate(res.json())
 
-    def retrieve(
-        self, track_id: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
-    ) -> Track:
+    def retrieve(self, track_id: Text, territory: TerritoriesType) -> Track:
         base_url = self.parent.base_url
         url = str(
             base_url.with_path(

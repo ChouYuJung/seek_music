@@ -1,8 +1,9 @@
-from typing import TYPE_CHECKING, Literal, Text
+from typing import TYPE_CHECKING, Text
 
 from seek_music.types.kkbox.album_data import AlbumData
 from seek_music.types.kkbox.artist import Artist
 from seek_music.types.kkbox.artist_data import ArtistData
+from seek_music.types.kkbox.territory import TerritoriesType
 from seek_music.types.kkbox.track_data import TrackData
 from seek_music.utils.url import join_paths
 
@@ -20,9 +21,7 @@ class Artists:
     def __init__(self, parent: "KKBox"):
         self.parent = parent
 
-    def retrieve(
-        self, artist_id: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
-    ) -> "Artist":
+    def retrieve(self, artist_id: Text, territory: TerritoriesType) -> "Artist":
         base_url = self.parent.base_url
         url = str(
             base_url.with_path(
@@ -39,7 +38,7 @@ class Artists:
     def list_albums(
         self,
         artist_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 100,
     ) -> "AlbumData":
@@ -69,7 +68,7 @@ class Artists:
     def list_related_artists(
         self,
         artist_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 100,
     ) -> "ArtistData":
@@ -100,7 +99,7 @@ class Artists:
     def list_top_tracks(
         self,
         artist_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 100,
     ) -> "TrackData":

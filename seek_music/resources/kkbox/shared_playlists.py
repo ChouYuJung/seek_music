@@ -1,6 +1,7 @@
-from typing import TYPE_CHECKING, Literal, Text
+from typing import TYPE_CHECKING, Text
 
 from seek_music.types.kkbox.playlist import Playlist
+from seek_music.types.kkbox.territory import TerritoriesType
 from seek_music.types.kkbox.track_data import TrackData
 from seek_music.utils.url import join_paths
 
@@ -16,9 +17,7 @@ class SharedPlaylists:
     def __init__(self, parent: "KKBox"):
         self.parent = parent
 
-    def retrieve(
-        self, playlist_id: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
-    ) -> "Playlist":
+    def retrieve(self, playlist_id: Text, territory: TerritoriesType) -> "Playlist":
         base_url = self.parent.base_url
         url = str(
             base_url.with_path(
@@ -35,7 +34,7 @@ class SharedPlaylists:
     def list_tracks(
         self,
         playlist_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 100,
     ) -> TrackData:

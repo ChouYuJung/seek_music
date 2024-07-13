@@ -86,7 +86,7 @@ class KKBox:
     genre_stations: "GenreStations"
     mood_stations: "MoodStations"
 
-    path_search = "search"
+    PATH_SEARCH = "search"
 
     def __init__(
         self,
@@ -153,7 +153,7 @@ class KKBox:
 
     def search(self, search_call: "SearchCall") -> "SearchResponse":
         url = str(
-            self.base_url.with_path(join_paths(self.base_url.path, self.path_search))
+            self.base_url.with_path(join_paths(self.base_url.path, self.PATH_SEARCH))
         )
         headers = self.headers
         data = search_call.model_dump(exclude_none=True)

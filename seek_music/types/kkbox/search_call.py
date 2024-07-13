@@ -1,6 +1,8 @@
-from typing import Literal, Optional, Text
+from typing import Optional, Text
 
 from pydantic import BaseModel, ConfigDict, Field
+
+from seek_music.types.kkbox.territory import TerritoriesType
 
 
 class SearchCall(BaseModel):
@@ -15,7 +17,7 @@ class SearchCall(BaseModel):
         title="Types to search",
         description="Comma-separated list of types to search",
     )
-    territory: Literal["HK", "JP", "MY", "SG", "TW"] = Field(
+    territory: TerritoriesType = Field(
         ...,
         title="Two-letter country codes",
         description="Two-letter country codes from ISO 3166-1 alpha-2",

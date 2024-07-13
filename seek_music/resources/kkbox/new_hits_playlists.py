@@ -1,7 +1,8 @@
-from typing import TYPE_CHECKING, Literal, Text
+from typing import TYPE_CHECKING, Text
 
 from seek_music.types.kkbox.playlist import Playlist
 from seek_music.types.kkbox.playlist_data import PlaylistData
+from seek_music.types.kkbox.territory import TerritoriesType
 from seek_music.types.kkbox.track_data import TrackData
 from seek_music.utils.url import join_paths
 
@@ -19,7 +20,7 @@ class NewHitsPlaylists:
 
     def list(
         self,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 5,
     ) -> "PlaylistData":
@@ -40,9 +41,7 @@ class NewHitsPlaylists:
             res.raise_for_status()
             return PlaylistData.model_validate(res.json())
 
-    def retrieve(
-        self, playlist_id: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
-    ) -> "Playlist":
+    def retrieve(self, playlist_id: Text, territory: TerritoriesType) -> "Playlist":
         base_url = self.parent.base_url
         url = str(
             base_url.with_path(
@@ -59,7 +58,7 @@ class NewHitsPlaylists:
     def list_tracks(
         self,
         playlist_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 100,
     ) -> TrackData:

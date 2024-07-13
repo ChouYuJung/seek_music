@@ -1,7 +1,8 @@
-from typing import TYPE_CHECKING, Literal, Text
+from typing import TYPE_CHECKING, Text
 
 from seek_music.types.kkbox.category_data import CategoryData, SubCategoryData
 from seek_music.types.kkbox.playlist_data import PlaylistData
+from seek_music.types.kkbox.territory import TerritoriesType
 from seek_music.utils.url import join_paths
 
 if TYPE_CHECKING:
@@ -18,7 +19,7 @@ class ChildrenCategories:
 
     def list(
         self,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 20,
     ) -> "CategoryData":
@@ -42,7 +43,7 @@ class ChildrenCategories:
     def list_subcategories(
         self,
         category_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 20,
     ) -> "SubCategoryData":
@@ -69,7 +70,7 @@ class ChildrenCategories:
     def list_playlists(
         self,
         category_id: Text,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
+        territory: TerritoriesType,
         offset: int = 0,
         limit: int = 20,
     ) -> "PlaylistData":

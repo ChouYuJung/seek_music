@@ -1,6 +1,7 @@
-from typing import TYPE_CHECKING, Literal, Text
+from typing import TYPE_CHECKING, Text
 
 from seek_music.types.kkbox.genre_data import Genre, GenreData
+from seek_music.types.kkbox.territory import TerritoriesType
 from seek_music.utils.url import join_paths
 
 if TYPE_CHECKING:
@@ -15,10 +16,7 @@ class MoodStations:
         self.parent = parent
 
     def list(
-        self,
-        territory: Literal["HK", "JP", "MY", "SG", "TW"],
-        offset: int = 0,
-        limit: int = 50,
+        self, territory: TerritoriesType, offset: int = 0, limit: int = 50
     ) -> "GenreData":
         if offset < 0:
             raise ValueError("Value 'offset' must be greater than or equal to 0")
@@ -37,9 +35,7 @@ class MoodStations:
             res.raise_for_status()
             return GenreData.model_validate(res.json())
 
-    def retrieve(
-        self, station_id: Text, territory: Literal["HK", "JP", "MY", "SG", "TW"]
-    ) -> "Genre":
+    def retrieve(self, station_id: Text, territory: TerritoriesType) -> "Genre":
         base_url = self.parent.base_url
         url = str(
             base_url.with_path(

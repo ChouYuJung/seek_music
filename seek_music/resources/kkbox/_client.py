@@ -62,13 +62,13 @@ class KKBox:
     - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories -> CategoryData
     - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories/{category_id} -> Category
     - [GET ] https://api.kkbox.com/v1.1/featured-playlist-categories/{category_id}/playlists -> PlaylistData
-    - [GET ] https://api.kkbox.com/v1.1/new-release-categories
-    - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}
-    - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}/albums
-    - [GET ] https://api.kkbox.com/v1.1/genre-stations
-    - [GET ] https://api.kkbox.com/v1.1/genre-stations/{station_id}
-    - [GET ] https://api.kkbox.com/v1.1/mood-stations
-    - [GET ] https://api.kkbox.com/v1.1/mood-stations/{station_id}
+    - [GET ] https://api.kkbox.com/v1.1/new-release-categories -> CategoryData
+    - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id} -> Category
+    - [GET ] https://api.kkbox.com/v1.1/new-release-categories/{category_id}/albums -> AlbumData
+    - [GET ] https://api.kkbox.com/v1.1/genre-stations -> GenreData
+    - [GET ] https://api.kkbox.com/v1.1/genre-stations/{station_id} -> Genre
+    - [GET ] https://api.kkbox.com/v1.1/mood-stations -> GenreData
+    - [GET ] https://api.kkbox.com/v1.1/mood-stations/{station_id} -> Genre
     """
 
     oauth2: "Oauth2"

@@ -71,3 +71,85 @@ def test_kkbox_resources_artists():
         )
         assert artist.data[0].album
         assert artist.data[0].album.artist.id == test_artist_id
+
+
+def test_kkbox_resources_charts():
+    # Test charts
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.charts.list(territory="TW", limit=1)
+        assert playlists.data
+        test_playlist_id = playlists.data[0].id  # Reset test_playlist_id
+    with delay(DELAY_TIME):
+        charts = sm.kkbox.charts.retrieve(test_playlist_id, territory="TW")
+        assert charts.id == test_playlist_id
+    with delay(DELAY_TIME):
+        charts = sm.kkbox.charts.list_tracks(test_playlist_id, territory="TW", limit=1)
+        assert charts.data[0].album
+
+
+def test_kkbox_resources_featured_playlists():
+    # Test featured playlists
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.featured_playlists.list(territory="TW", limit=1)
+        assert playlists.data
+        test_playlist_id = playlists.data[0].id  # Reset test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.featured_playlists.retrieve(
+            test_playlist_id, territory="TW"
+        )
+        assert playlists.id == test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.featured_playlists.list_tracks(
+            test_playlist_id, territory="TW", limit=1
+        )
+        assert playlists.data[0].album
+
+
+def test_kkbox_resources_new_hits_playlists():
+    # Test new hits playlists
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.new_hits_playlists.list(territory="TW", limit=1)
+        assert playlists.data
+        test_playlist_id = playlists.data[0].id  # Reset test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.new_hits_playlists.retrieve(
+            test_playlist_id, territory="TW"
+        )
+        assert playlists.id == test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.new_hits_playlists.list_tracks(
+            test_playlist_id, territory="TW", limit=1
+        )
+        assert playlists.data[0].album
+
+
+def test_kkbox_resources_session_playlists():
+    # Test session playlists
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.session_playlists.list(territory="TW", limit=1)
+        assert playlists.data
+        test_playlist_id = playlists.data[0].id  # Reset test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.session_playlists.retrieve(
+            test_playlist_id, territory="TW"
+        )
+        assert playlists.id == test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.session_playlists.list_tracks(
+            test_playlist_id, territory="TW", limit=1
+        )
+        assert playlists.data[0].album
+
+
+# shared-playlists
+def test_kkbox_resources_shared_playlists():
+    # Test shared playlists
+    test_playlist_id = "4nUZM-TY2aVxZ2xaA-"
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.shared_playlists.retrieve(test_playlist_id, territory="TW")
+        assert playlists.id == test_playlist_id
+    with delay(DELAY_TIME):
+        playlists = sm.kkbox.shared_playlists.list_tracks(
+            test_playlist_id, territory="TW", limit=1
+        )
+        assert playlists.data[0].album

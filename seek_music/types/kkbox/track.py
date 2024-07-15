@@ -10,9 +10,9 @@ class Track(BaseModel):
     id: str
     name: str
     duration: int
-    isrc: str
+    isrc: Optional[str] = Field(default=None)
     url: HttpUrl
     track_number: int
     explicitness: bool
     available_territories: List[str]
-    album: Optional[Album] = Field(None)
+    album: Optional[Album] = Field(default=None)

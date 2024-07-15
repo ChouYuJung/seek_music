@@ -23,20 +23,20 @@ class SearchCall(BaseModel):
         description="Two-letter country codes from ISO 3166-1 alpha-2",
     )
     offset: int = Field(
-        0,
+        default=0,
         title="Offset",
         description="The number of items to skip before starting to collect the result set",
         ge=0,
     )
     limit: int = Field(
-        15,
+        default=15,
         title="Limit",
         description="The number of items to return per page",
         ge=1,
         le=50,
     )
     availability: Optional[bool] = Field(
-        None,
+        default=None,
         title="Show only authorized result",
         description="Show only authorized result",
     )

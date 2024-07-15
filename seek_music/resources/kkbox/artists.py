@@ -70,7 +70,7 @@ class Artists:
         artist_id: Text,
         territory: TerritoriesType,
         offset: int = 0,
-        limit: int = 100,
+        limit: int = 20,
     ) -> "ArtistData":
         if offset < 0:
             raise ValueError("Value 'offset' must be greater than or equal to 0")

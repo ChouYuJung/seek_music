@@ -141,7 +141,6 @@ def test_kkbox_resources_session_playlists():
         assert playlists.data[0].album
 
 
-# shared-playlists
 def test_kkbox_resources_shared_playlists():
     # Test shared playlists
     test_playlist_id = "4nUZM-TY2aVxZ2xaA-"
@@ -153,3 +152,56 @@ def test_kkbox_resources_shared_playlists():
             test_playlist_id, territory="TW", limit=1
         )
         assert playlists.data[0].album
+
+
+def test_kkbox_resources_children_categories():
+    # Test children categories
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.children_categories.list(territory="TW", limit=1)
+        assert categories.data
+        test_category_id = categories.data[0].id  # Set test_category_id
+    with delay(DELAY_TIME):
+        sub_categories = sm.kkbox.children_categories.list_subcategories(
+            test_category_id, territory="TW", limit=1
+        )
+        assert sub_categories.id == test_category_id
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.children_categories.list_playlists(
+            test_category_id, territory="TW", limit=1
+        )
+        assert categories.data
+
+
+def test_kkbox_resources_featured_playlist_categories():
+    # Test featured playlist categories
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.featured_playlist_categories.list(territory="TW", limit=1)
+        assert categories.data
+        test_category_id = categories.data[0].id  # Set test_category_id
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.featured_playlist_categories.retrieve(
+            test_category_id, territory="TW"
+        )
+        assert categories.id == test_category_id
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.featured_playlist_categories.list_playlists(
+            test_category_id, territory="TW", limit=1
+        )
+
+
+def test_kkbox_resources_new_release_categories():
+    # Test new release categories
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.new_release_categories.list(territory="TW", limit=1)
+        assert categories.data
+        test_category_id = categories.data[0].id  # Set test_category_id
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.new_release_categories.retrieve(
+            test_category_id, territory="TW"
+        )
+        assert categories.id == test_category_id
+    with delay(DELAY_TIME):
+        categories = sm.kkbox.new_release_categories.list_albums(
+            test_category_id, territory="TW", limit=20
+        )
+        assert categories.data

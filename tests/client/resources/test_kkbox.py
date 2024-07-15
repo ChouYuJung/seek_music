@@ -205,3 +205,25 @@ def test_kkbox_resources_new_release_categories():
             test_category_id, territory="TW", limit=20
         )
         assert categories.data
+
+
+# genre-stations
+def test_kkbox_resources_genre_stations():
+    with delay(DELAY_TIME):
+        stations = sm.kkbox.genre_stations.list(territory="TW", limit=1)
+        assert stations.data
+        test_station_id = stations.data[0].id  # Set test_station_id
+    with delay(DELAY_TIME):
+        stations = sm.kkbox.genre_stations.retrieve(test_station_id, territory="TW")
+        assert stations.id == test_station_id
+
+
+# mood-stations
+def test_kkbox_resources_mood_stations():
+    with delay(DELAY_TIME):
+        stations = sm.kkbox.mood_stations.list(territory="TW", limit=1)
+        assert stations.data
+        test_station_id = stations.data[0].id  # Set test_station_id
+    with delay(DELAY_TIME):
+        stations = sm.kkbox.mood_stations.retrieve(test_station_id, territory="TW")
+        assert stations.id == test_station_id

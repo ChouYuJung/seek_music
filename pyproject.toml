@@ -4,7 +4,7 @@ description = "The client to seek msuic."
 license = "Apache License Version 2.0"
 name = "seek-music"
 readme = "README.md"
-version = "0.2.0"
+version = "0.3.0"
 
 [tool.poetry.dependencies]
 aiohttp = "3.*"
